@@ -10,14 +10,18 @@ class Contact():
         self.last = "Smith"
         self.phone = "07555 555555"
         self.email = "john@smith.com"
+
+    def __repr__(self) -> str:
+        return str(self.__dict__)
     
     contacts = []
+
     def save(self):
         self.contacts.append(self)
 
     @classmethod
     def search(cls, query):
-        return [c for c in cls.contacts if query in c.first]
+        return [c for c in cls.contacts if query in c.__repr__()]
 
     @classmethod
     def all(cls):
