@@ -1,0 +1,1 @@
+adventures with HTMX. initially following on from the book [Hypermedia Systems](hypermedia.systems)
