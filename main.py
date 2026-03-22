@@ -33,7 +33,7 @@ def index():
 @app.route("/contacts")
 def contacts():
     search = request.args.get("q")
-    if search is not None:
+    if search:
         contacts_set = Contact.search(search)
     else:
         contacts_set = Contact.all()
