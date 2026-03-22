@@ -17,7 +17,7 @@ class Contact():
 
     @classmethod
     def search(cls, query):
-        return [c for c in cls.contacts if c.first == query]
+        return [c for c in cls.contacts if query in c.first]
 
     @classmethod
     def all(cls):
