@@ -1,6 +1,30 @@
-from flask import Flask, redirect, request
+from flask import Flask, redirect, request, render_template
 
 app = Flask(__name__)
+
+
+class Contact():
+    def __init__(self) -> None:
+        self.id = 1
+        self.first = "John"
+        self.last = "Smith"
+        self.phone = "07555 555555"
+        self.email = "john@smith.com"
+    
+    contacts = []
+    def save(self):
+        self.contacts.append(self)
+
+    @classmethod
+    def search(cls, query):
+        return [c for c in cls.contacts if c.first == query]
+
+    @classmethod
+    def all(cls):
+        return cls.contacts
+
+c_test = Contact()
+c_test.save()
 
 @app.route("/")
 def index():
