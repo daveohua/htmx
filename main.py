@@ -1,3 +1,4 @@
+import csv
 from flask import Flask, redirect, request, render_template
 
 app = Flask(__name__)
@@ -14,12 +15,12 @@ class Contact():
     def all(cls):
         return cls.contacts
         
-    def __init__(self) -> None:
-        self.id = 1
-        self.first = "John"
-        self.last = "Smith"
-        self.phone = "07555 555555"
-        self.email = "john@smith.com"
+    def __init__(self, id, first, last, phone, email) -> None:
+        self.id = id
+        self.first = first
+        self.last = last
+        self.phone = phone
+        self.email = email
 
     def __repr__(self) -> str:
         return str(self.__dict__)
@@ -27,9 +28,10 @@ class Contact():
     def save(self):
         self.contacts.append(self)
 
-
-c_test = Contact()
-c_test.save()
+with open("test_data.csv", "r", newline="") as test_data:
+    reader = csv.reader(test_data)
+    for row in reader:
+        Contact(*row).save()
 
 @app.route("/")
 def index():
