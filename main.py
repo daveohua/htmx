@@ -4,6 +4,16 @@ app = Flask(__name__)
 
 
 class Contact():
+    contacts = []
+    
+    @classmethod
+    def search(cls, query):
+        return [c for c in cls.contacts if query in c.__repr__()]
+
+    @classmethod
+    def all(cls):
+        return cls.contacts
+        
     def __init__(self) -> None:
         self.id = 1
         self.first = "John"
@@ -13,19 +23,10 @@ class Contact():
 
     def __repr__(self) -> str:
         return str(self.__dict__)
-    
-    contacts = []
 
     def save(self):
         self.contacts.append(self)
 
-    @classmethod
-    def search(cls, query):
-        return [c for c in cls.contacts if query in c.__repr__()]
-
-    @classmethod
-    def all(cls):
-        return cls.contacts
 
 c_test = Contact()
 c_test.save()
